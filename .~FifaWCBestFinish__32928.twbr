@@ -267,8 +267,11 @@
         </groupfilter>
       </group>
       <extract count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/MJM75/Documents/My Tableau Repository/Datasources/Sheet1 (Fifa Worldcup Winners).hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='' username='tableau_internal_user'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/MJM75/Documents/My Tableau Repository/Datasources/Sheet1 (Fifa Worldcup Winners).hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='07/02/2018 01:01:00 AM' username='tableau_internal_user'>
           <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='' increment-value='%null%' refresh-type='create' rows-inserted='79' timestamp-start='2018-07-02 01:01:00.367' />
+          </refresh>
           <metadata-records>
             <metadata-record class='column'>
               <remote-name>Pos</remote-name>
@@ -458,7 +461,7 @@
           </metadata-records>
         </connection>
       </extract>
-      <layout dim-ordering='alphabetic' dim-percentage='0.47439' measure-ordering='alphabetic' measure-percentage='0.52561' show-aliased-fields='true' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.487069' measure-ordering='alphabetic' measure-percentage='0.512931' show-aliased-fields='true' show-structure='true' />
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[none:Best finish:nk]' type='palette'>
@@ -606,9 +609,11 @@
           </mapsources>
           <datasource-dependencies datasource='federated.1ettqxe160y7fo1axu6y50wz4wp2'>
             <column datatype='string' name='[Best finish]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[Pts]' role='measure' type='quantitative' />
             <column datatype='string' name='[Team]' role='dimension' semantic-role='[Country].[Name]' type='nominal' />
             <column-instance column='[Best finish]' derivation='None' name='[none:Best finish:nk]' pivot='key' type='nominal' />
             <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Pts]' derivation='Sum' name='[sum:Pts:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
           <manual-sort column='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[none:Best finish:nk]' direction='ASC'>
             <dictionary>
@@ -674,6 +679,9 @@
             <encodings>
               <color column='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[none:Best finish:nk]' />
               <lod column='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[none:Team:nk]' />
+              <lod column='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[sum:Pts:qk]' />
+              <lod column='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[none:Best finish:nk]' />
+              <lod column='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[sum:Pts:qk]' />
               <geometry column='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[Geometry (generated)]' />
             </encodings>
           </pane>
@@ -1235,12 +1243,12 @@
   <dashboards>
     <dashboard name='WC Best Finishes'>
       <style />
-      <size sizing-mode='automatic' />
+      <size maxheight='827' maxwidth='1169' minheight='827' minwidth='1169' preset-index='15' sizing-mode='fixed' />
       <zones>
         <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
-          <zone h='98178' id='5' param='horz' type='layout-flow' w='98462' x='769' y='911'>
-            <zone h='98178' id='3' type='layout-basic' w='98462' x='769' y='911'>
-              <zone h='98178' id='1' name='WC Winners' show-title='false' w='47789' x='769' y='911'>
+          <zone h='98066' id='5' param='horz' type='layout-flow' w='98632' x='684' y='967'>
+            <zone h='98066' id='3' type='layout-basic' w='98632' x='684' y='967'>
+              <zone h='98066' id='1' name='WC Winners' show-title='false' w='47868' x='684' y='967'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
                   <format attr='border-style' value='none' />
@@ -1248,7 +1256,15 @@
                   <format attr='margin' value='4' />
                 </zone-style>
               </zone>
-              <zone h='98178' id='9' name='Goals Scored' w='50673' x='48558' y='911'>
+              <zone h='88997' id='9' name='Goals Scored' w='50764' x='48552' y='967'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='9069' id='6' name='WC Winners' pane-specification-id='0' param='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[none:Best finish:nk]' type='color' w='50764' x='48552' y='89964'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
                   <format attr='border-style' value='none' />
@@ -1275,24 +1291,6 @@
             <run bold='true' fontcolor='#0b0080' fontname='sans-serif' fontsize='10'>FIFA World Cup</run>
             <run fontcolor='#222222' fontname='sans-serif' fontsize='10'> by a number of criteria including matches, wins, losses, goals, total points, points per played matches, etc.)</run>
           </formatted-text>
-        </zone>
-        <zone fixed-size='158' h='26082' id='4' is-fixed='true' param='vert' type='layout-flow' w='15192' x='83558' y='67426'>
-          <zone h='18679' id='6' name='WC Winners' pane-specification-id='0' param='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[none:Best finish:nk]' type='color' w='15192' x='83558' y='67426'>
-            <zone-style>
-              <format attr='border-color' value='#000000' />
-              <format attr='border-style' value='none' />
-              <format attr='border-width' value='0' />
-              <format attr='margin' value='4' />
-            </zone-style>
-          </zone>
-          <zone h='7403' id='10' name='Goals Scored' pane-specification-id='0' param='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[Multiple Values]' type='color' w='15192' x='83558' y='86105'>
-            <zone-style>
-              <format attr='border-color' value='#000000' />
-              <format attr='border-style' value='none' />
-              <format attr='border-width' value='0' />
-              <format attr='margin' value='4' />
-            </zone-style>
-          </zone>
         </zone>
         <zone forceUpdate='true' h='4784' id='7' type='text' w='53269' x='45096' y='93508'>
           <formatted-text>
@@ -1393,8 +1391,8 @@
           <zones>
             <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
               <zone h='97602' id='5' param='horz' type='layout-flow' w='95734' x='2133' y='1199'>
-                <zone h='97602' id='3' type='layout-basic' w='53601' x='2133' y='1199'>
-                  <zone h='92840' id='1' name='WC Winners' show-title='false' w='53601' x='2133' y='1199'>
+                <zone h='97602' id='3' type='layout-basic' w='85601' x='2133' y='1199'>
+                  <zone h='92838' id='1' name='WC Winners' show-title='false' w='85601' x='2133' y='1199'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -1402,7 +1400,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone forceUpdate='true' h='4762' id='7' type='text' w='53601' x='2133' y='94039'>
+                  <zone forceUpdate='true' h='4764' id='7' type='text' w='85601' x='2133' y='94037'>
                     <formatted-text>
                       <run fontalignment='2'>Data Source wikipedia </run>
                       <run auto-url='true' fontalignment='2' hyperlink='tabdoc:load-url url=&amp;quot;https://en.wikipedia.org/wiki/All-time_table_of_the_FIFA_World_Cup&amp;quot;'>https://en.wikipedia.org/wiki/All-time_table_of_the_FIFA_World_Cup</run>
@@ -1415,8 +1413,8 @@
                     </zone-style>
                   </zone>
                 </zone>
-                <zone fixed-size='158' h='97602' id='4' is-fixed='true' param='vert' type='layout-flow' w='42133' x='55734' y='1199'>
-                  <zone h='33883' id='6' name='WC Winners' pane-specification-id='0' param='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[none:Best finish:nk]' type='color' w='42133' x='55734' y='1199'>
+                <zone fixed-size='38' h='97602' id='4' is-fixed='true' param='vert' type='layout-flow' w='10133' x='87734' y='1199'>
+                  <zone h='33883' id='6' name='WC Winners' pane-specification-id='0' param='[federated.1ettqxe160y7fo1axu6y50wz4wp2].[none:Best finish:nk]' type='color' w='10133' x='87734' y='1199'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -1460,7 +1458,7 @@
           <default-map-tool-selection tool='1' />
         </viewpoint>
       </viewpoints>
-      <active id='-1' />
+      <active id='9' />
       <device-preview visible='true'>
         <device is-portrait='false' name='Generic Desktop Monitor' type='Desktop' />
         <device is-portrait='true' name='Generic Phone' type='Phone' />
